@@ -1,26 +1,29 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <omp.h>
+#include "matrix.h"
 
-#define MINDIM  1024
-#define MAXDIM  1536
-#define NUM_VALIDATES 10
+// Input contains three matrices A,B,C and alpha and Beta.
+// A of dimensions m X n.
+// B of dimensions n X p.
+// C of dimensions m X p.
+// Output is a matrix D of dimensions m X p.
+// Task is to write a routine which computes a NEW matrix C such that:
+// C = alpha x A x B + beta x C
 
-void MatMul( int m, int n, int p, int b, double alpha, double beta, double *A, double *B, double *C ) ;
+// This main functions tests the speed of program by using matrices
+// of varying dimesions from 1024 X 1024 to 1536 X 1536 in steps of 256.
+// Each time it launches different threads from 1 till 4 in steps of 2.
+
+//MatMul( m, n, p, b, alpha, beta, A, B, C ) is the function that solves computes the matrix C.
 
 int main( int argc, char **argv )
 {
-    double *A, *B, *C, *Corg, alpha, beta, time1, time2, time3, time4 ;
+    double *A, *B, *C, *Corg, alpha, beta, time1, time2;
     int m, n, p, b, bb, bbmin, bbmax ;
     int row, col, numt ;
     char status[100] ;
 
     alpha = (double) 1.3 ;
     beta  = (double) 2.9 ;
-
-    //printf( "X" ) ; fflush( stdout) ;
 
     A = (double *) malloc( sizeof(double) * MAXDIM * MAXDIM ) ;
     B = (double *) malloc( sizeof(double) * MAXDIM * MAXDIM ) ;
@@ -32,9 +35,6 @@ int main( int argc, char **argv )
         exit(1) ;
     }
 
-    //printf( "Y" ) ; fflush( stdout ) ;
-    // m = n = p = 64 ;
-    // b = 16 ;
     for( row = 0 ; row < MAXDIM ; row++ )
         for( col = 0 ; col < MAXDIM ; col++ )
             A[row*MAXDIM+col] = rand() ;
@@ -46,8 +46,6 @@ int main( int argc, char **argv )
     for( row = 0 ; row < MAXDIM ; row++ )
         for( col = 0 ; col < MAXDIM ; col++ )
             Corg[row*MAXDIM+col] = rand() ;
-
-    //printf( "A" ) ; fflush( stdout ) ;
 
     for( m = MINDIM ; m <= MAXDIM ; m += 256 )
     {
@@ -71,13 +69,10 @@ int main( int argc, char **argv )
                     if ( b > n ) b = n ;
                     if ( b > p ) b = p ;
 
-                    //printf ( "0" ) ; fflush( stdout ) ;
                     omp_set_num_threads( numt ) ;
                     time1 = time(NULL) ;
                     MatMul( m, n, p, b, alpha, beta, A, B, C ) ;
                     time2 = time(NULL) ;
-                    //time2 = omp_get_wtime() ;
-                    //printf ( "1" ) ; fflush( stdout ) ;
 
                     /* Validate random entries */
                     int success = 1, r ;
@@ -93,7 +88,7 @@ int main( int argc, char **argv )
                         for( k = 0 ; k < n ; k++ )
                             ans += alpha * A[row*n+k]*B[k*p+col] ;
 
-                        if ( ans > C[row*p+col] )
+                        if (ans > C[row*p+col])
                         {
                             min = C[row*p+col] ;
                             max = ans ;
@@ -108,13 +103,11 @@ int main( int argc, char **argv )
                         if ( ( min > (double) 0.0001 ) && ( err > (double) 0.01 ) )
                             success = 0 ;
                     }
-                    //printf ( "2" ) ; fflush( stdout ) ;
 
                     if ( success == 0 )
                         strcpy( status, "Failed" ) ;
                     else
                         strcpy( status, "Passed" ) ;
-                    //printf ( "3" ) ; fflush( stdout ) ;
 
                     printf( "{m=%d,n=%d,p=%d,numt=%d,b=%d,time=%g,status=%s},  ",
                               m, n, p, numt, b, (double) difftime(time2,time1), status ) ;
@@ -122,7 +115,6 @@ int main( int argc, char **argv )
                 }
              }
     }
-
-    return 0 ;
+    return 0;
 }
 
