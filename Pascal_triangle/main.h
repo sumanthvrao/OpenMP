@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <time.h>
 #include <omp.h>
 #define MAXDIM 20
 extern void FillPascalTriangle( int arr[MAXDIM][MAXDIM+1] ) ;
