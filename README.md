@@ -26,7 +26,9 @@ further parallelizing the code by allowing threads to execute first loops interc
 4. execute after compilation- `./main`
 
 ### Output:
-```{m=1024,n=1024,p=1024,numt=1,b=16,time=9,status=Passed},  {m=1024,n=1024,p=1024,numt=2,b=16,time=4,status=Passed},  {m=1024,n=1024,p=1024,numt=4,b=4,time=5,status=Passed},  {m=1024,n=1024,p=1024,numt=4,b=16,time=3,status=Passed},  {m=1024,n=1024,p=1024,numt=4,b=64,time=5,status=Passed},  {m=1280,n=1280,p=1280,numt=1,b=16,time=16,status=Passed},  {m=1280,n=1280,p=1280,numt=2,b=16,time=8,status=Passed},  {m=1280,n=1280,p=1280,numt=4,b=4,time=7,status=Passed},  {m=1280,n=1280,p=1280,numt=4,b=16,time=7,status=Passed},  {m=1280,n=1280,p=1280,numt=4,b=64,time=7,status=Passed},  {m=1536,n=1536,p=1536,numt=1,b=16,time=27,status=Passed},  {m=1536,n=1536,p=1536,numt=2,b=16,time=15,status=Passed},  {m=1536,n=1536,p=1536,numt=4,b=4,time=14,status=Passed},  {m=1536,n=1536,p=1536,numt=4,b=16,time=12,status=Passed},  {m=1536,n=1536,p=1536,numt=4,b=64,time=14,status=Passed}```
+```
+{m=1024,n=1024,p=1024,numt=1,b=16,time=9,status=Passed},  {m=1024,n=1024,p=1024,numt=2,b=16,time=4,status=Passed},  {m=1024,n=1024,p=1024,numt=4,b=4,time=5,status=Passed},  {m=1024,n=1024,p=1024,numt=4,b=16,time=3,status=Passed},  {m=1024,n=1024,p=1024,numt=4,b=64,time=5,status=Passed},  {m=1280,n=1280,p=1280,numt=1,b=16,time=16,status=Passed},  {m=1280,n=1280,p=1280,numt=2,b=16,time=8,status=Passed},  {m=1280,n=1280,p=1280,numt=4,b=4,time=7,status=Passed},  {m=1280,n=1280,p=1280,numt=4,b=16,time=7,status=Passed},  {m=1280,n=1280,p=1280,numt=4,b=64,time=7,status=Passed},  {m=1536,n=1536,p=1536,numt=1,b=16,time=27,status=Passed},  {m=1536,n=1536,p=1536,numt=2,b=16,time=15,status=Passed},  {m=1536,n=1536,p=1536,numt=4,b=4,time=14,status=Passed},  {m=1536,n=1536,p=1536,numt=4,b=16,time=12,status=Passed},  {m=1536,n=1536,p=1536,numt=4,b=64,time=14,status=Passed}
+```
 
 The time increases with increase in thread but decreases with dimensional increase
 
@@ -52,5 +54,6 @@ function for the specific cell to be filled.
 ```
 numt=1, status=Passed, workload=[210],time=1
 numt=2, status=Passed, workload=[210,0],time=1
-numt=4, status=Passed, workload=[210,0,0,0],time=5```
+numt=4, status=Passed, workload=[210,0,0,0],time=5
+```
 
