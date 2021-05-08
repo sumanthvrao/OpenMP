@@ -1,5 +1,5 @@
 # OpenMP
-Optimized codes to achieve parallelism using OpenMP
+This repository contains the source code of programs that are optimized to achieve fast execution times by leveraging parallelism using OpenMP.
 
 [![OpenMP](https://img.shields.io/badge/OpenMP-3.0-red.svg)](https://www.openmp.org/)
 
